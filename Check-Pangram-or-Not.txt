@@ -1,0 +1,38 @@
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class PangramChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String input = scanner.nextLine().toLowerCase();
+
+        boolean isPangram = checkPangram(input);
+
+        if (isPangram) {
+            System.out.println("The input is a pangram.");
+        } else {
+            System.out.println("The input is not a pangram.");
+        }
+    }
+
+    public static boolean checkPangram(String s) {
+        Set<Character> alphabetSet = new HashSet<>();
+
+        // Add all the alphabets to the set
+        for (char c = 'a'; c <= 'z'; c++) {
+            alphabetSet.add(c);
+        }
+
+        // Check if each letter in the input is present in the set
+        for (char c : s.toCharArray()) {
+            if (Character.isLetter(c)) {
+                alphabetSet.remove(c);
+            }
+        }
+
+        // If the set is empty, then all letters are present (it's a pangram)
+        return alphabetSet.isEmpty();
+    }
+}
